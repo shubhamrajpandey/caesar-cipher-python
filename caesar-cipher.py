@@ -30,3 +30,15 @@ def enter_message():
             print("Invalid shift. Please enter a valid number.")
     message = text.upper()
     return mode, message, shift
+
+def encrypt(message, shift):
+    '''
+    This function encrypts the given message using the Caesar Cipher algorithm.
+    '''
+    encrypted_message = ''
+    for char in message.upper():
+        if char.isalpha():
+            encrypted_message += chr((ord(char) + shift - 65) % 26 + 65)
+        else:
+            encrypted_message += char
+    return encrypted_message
