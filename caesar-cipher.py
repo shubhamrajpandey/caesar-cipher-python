@@ -132,3 +132,32 @@ def message_or_file():
             print("Invalid shift. Please enter a valid number.")
 
     return mode, message, filename, shift
+
+def main():
+    welcome()
+    while True:
+        mode, message, filename, shift = message_or_file()
+        if filename is not None:
+            # Read the message from file, process, and write to the output file
+            messages = process_file(filename, mode, shift)
+            # Encrypt or decrypt each message in the list and write to the output file
+            write_messages(messages)
+            print("Output written to results.txt")
+        else:
+            # Encrypt or decrypt the message and print the result
+            if mode == 'e':
+                encrypted_message = encrypt(message, shift)
+                print("Encrypted message: {}".format(encrypted_message))
+            else:
+                decrypted_message = decrypt(message, shift)
+                print("Decrypted message: {}".format(decrypted_message))
+
+        another_msg = input("Would you like to encrypt or decrypt another message? (y/n): ")
+        another_msg= another_msg.lower()
+        if another_msg == 'n':
+            print("Thanks for using the program, goodbye!")
+            return
+        elif another_msg == 'y':
+            continue
+        else:
+            print("Invalid input. Please enter 'y' or 'n'.")
