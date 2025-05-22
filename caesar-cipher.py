@@ -79,3 +79,11 @@ def process_file(filename, mode, shift):
                 return None
 
     return messages
+
+def is_file(filename):
+    # This function checks if a file with the given filename exists.
+    try:
+        with open(filename, 'r'):
+            return True
+    except FileNotFoundError:
+        return False
