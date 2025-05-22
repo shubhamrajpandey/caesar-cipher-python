@@ -54,3 +54,28 @@ def decrypt(message, shift):
         else:
             decrypted_message += char
     return decrypted_message
+def process_file(filename, mode, shift):
+    '''
+    This function reads messages from a file, performs encryption or decryption,and returns the list of processed messages.
+    '''
+    #empty list to store message
+    messages = []
+
+    # Reading each line from the file
+    with open(filename, 'r') as file:#the file open with in a read mode
+        for line in file:
+            message = line.strip().upper()
+            #to remove the whitespace characters from the letter variable read
+            if mode == 'e':
+                messages.append(encrypt(message, shift))
+                 #Encrypt the message and appends in  the message list previously made.
+                print(messages)
+            elif mode == 'd':
+                messages.append(decrypt(message, shift))
+                #Decrypt the message and appends in  the message list previously made.
+                print(messages)
+            else:
+                print("Invalid mode: {}".format(mode))
+                return None
+
+    return messages
