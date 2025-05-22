@@ -42,3 +42,15 @@ def encrypt(message, shift):
         else:
             encrypted_message += char
     return encrypted_message
+
+def decrypt(message, shift):
+    '''
+    This function decrypts the given message using the Caesar Cipher algorithm.
+    '''
+    decrypted_message = ''
+    for char in message:
+        if char.isalpha():
+            decrypted_message += chr((ord(char) - shift - 65) % 26 + 65)
+        else:
+            decrypted_message += char
+    return decrypted_message
