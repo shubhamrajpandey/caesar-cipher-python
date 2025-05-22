@@ -87,3 +87,48 @@ def is_file(filename):
             return True
     except FileNotFoundError:
         return False
+    
+#Each message is written to a new line in the file.
+def write_messages(messages):
+    # This function writes messages to the 'results.txt' file.
+    with open('results.txt', 'w') as file:
+        for message in messages:
+            file.write(message + '\n')
+
+def message_or_file():
+    # This function prompts the user to choose between encrypting/decrypting a message
+    # from the console or a file.
+
+    while True:
+        mode = input("Would you like to encrypt (e) or decrypt (d): ")
+        mode=mode.lower()
+        if mode in ['e', 'd']:
+            break
+        print("Invalid mode. Please enter 'e' for encryption or 'd' for decryption.")
+
+    while True:
+        source = input("Would you like to read from a file (f) or the console (c)? ").lower()
+        if source in ['f', 'c']:
+            break
+        print("Invalid source. Please enter 'f' for file or 'c' for console.")
+
+    if source == 'f':
+        while True:
+            filename = input("Enter a filename: ")
+            if is_file(filename):
+                break
+            print("Invalid filename. Please enter a valid filename.")
+        message = None
+    else:
+        filename = None
+        message = input("What message would you like to {}: ".format('encrypt' if mode == 'e' else 'decrypt'))
+        message = message.upper()
+
+    while True:
+        try:
+            shift = int(input("What is the shift number: "))
+            break
+        except ValueError:
+            print("Invalid shift. Please enter a valid number.")
+
+    return mode, message, filename, shift
